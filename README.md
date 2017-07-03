@@ -82,7 +82,7 @@ Update existing draft
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
 | draftId    | String| Id of the draft
-| message    | JSON  | JSON object of the draft
+| message    | String  | The entire draft message in an RFC 2822 formatted and base64url encoded string.
 | id         | String| Id of the draft
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
