@@ -20,7 +20,7 @@ $app->post('/api/Gmail/sendDraft', function ($request, $response, $args) {
     $body['id'] = $post_data['args']['draftId'];
 
     if (!empty($post_data['args']['message'])) {
-        $body['message'] = $post_data['args']['message'];
+        $body['message']['raw'] = $post_data['args']['message'];
 
     }
     try {

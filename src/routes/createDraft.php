@@ -17,11 +17,13 @@ $app->post('/api/Gmail/createDraft', function ($request, $response, $args) {
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
-    $body['message'] = $post_data['args']['message'];
+    $body['message']['raw'] =$post_data['args']['message'];
 
     if (!empty($post_data['args']['id'])) {
         $body['id'] = $post_data['args']['id'];
     }
+
+
     try {
 
         $resp = $client->request('POST', $query_str, [

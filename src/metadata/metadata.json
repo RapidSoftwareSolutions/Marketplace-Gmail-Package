@@ -139,8 +139,8 @@
         },
         {
           "name": "message",
-          "type": "JSON",
-          "info": "JSON object of the draft",
+          "type": "String",
+          "info": "The entire draft message in an RFC 2822 formatted and base64url encoded string.",
           "required": true
         },
         {
@@ -293,8 +293,8 @@
         },
         {
           "name": "message",
-          "type": "JSON",
-          "info": "JSON object of the draft",
+          "type": "String",
+          "info": "The entire draft message in an RFC 2822 formatted and base64url encoded string.",
           "required": true
         },
         {
