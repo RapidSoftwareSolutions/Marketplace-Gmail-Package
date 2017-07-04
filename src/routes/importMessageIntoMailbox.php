@@ -3,13 +3,7 @@ $app->post('/api/Gmail/importMessageIntoMailbox', function ($request, $response,
     $settings = $this->settings;
 
     //checking properly formed json
-    $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accessToken', 'raw']);
-    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
-    } else {
-        $post_data = $validateRes;
-    }
+    $post_data = $request->getParsedBody();
     //forming request to vendor API
     $email = empty($post_data['args']['email']) ? "me" : $post_data['args']['email'];
 
@@ -17,7 +11,7 @@ $app->post('/api/Gmail/importMessageIntoMailbox', function ($request, $response,
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
-    $body['raw'] = $post_data['args']['raw'];
+    $body['raw'] = \Models\EmailEncoder::base64url_encode($post_data['args']['raw']);
 
     if (!empty($post_data['args']['deleted'])) {
         $body['deleted'] = $post_data['args']['deleted'];

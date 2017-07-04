@@ -21,6 +21,7 @@ $app = new \Slim\App($settings);
 require __DIR__ . '/../src/Models/paginationClass.php';
 require __DIR__ . '/../src/Models/normalizeJson.php';
 require __DIR__ . '/../src/Models/checkRequest.php';
+require __DIR__ . '/../src/Models/EmailEncoder.php';
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';

@@ -1,28 +1,22 @@
 <?php
-$app->post('/api/Gmail/createDraft', function ($request, $response, $args) {
+$app->post('/api/Gmail/sendRawMessage', function ($request, $response, $args) {
     $settings = $this->settings;
 
-    //checking properly formed json
-    $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accessToken', 'message']);
-    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
-    } else {
-        $post_data = $validateRes;
-    }
-    //forming request to vendor API
+
+    $post_data = $request->getParsedBody();
+
     $email = empty($post_data['args']['email']) ? "me" : $post_data['args']['email'];
 
-    $query_str = $settings['api_url'] . 'users/' . $email . '/drafts';
+    $query_str = $settings['api_url'] . 'users/' . $email . '/messages/send';
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
-    $body['message']['raw'] =$post_data['args']['message'];
+    $body['raw'] = \Models\EmailEncoder::base64url_encode($post_data['args']['message']);
 
-    if (!empty($post_data['args']['id'])) {
-        $body['id'] = $post_data['args']['id'];
+
+    if (!empty($post_data['args']['threadId'])) {
+        $body['threadId'] = $post_data['args']['threadId'];
     }
-
 
     try {
 
@@ -46,7 +40,7 @@ $app->post('/api/Gmail/createDraft', function ($request, $response, $args) {
         }
 
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
-        $responseBody = $exception->getResponse()->getReasonPhrase();
+        $responseBody = $exception->getResponse()->getBody()->getContents();
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';
         $result['contextWrites']['to']['status_msg'] = $responseBody;

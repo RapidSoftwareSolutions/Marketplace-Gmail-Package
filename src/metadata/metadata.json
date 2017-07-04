@@ -128,7 +128,7 @@
       ]
     },
     {
-      "name": "createDraft",
+      "name": "createRawDraft",
       "description": "Creates a new draft",
       "args": [
         {
@@ -140,13 +140,53 @@
         {
           "name": "message",
           "type": "String",
-          "info": "The entire draft message in an RFC 2822 formatted and base64url encoded string.",
+          "info": "The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>\r\nSubject: Failure Notice\r\n\r\n Hi. This is the mail transport agent at mail.elsewhere.com.\r\n ",
           "required": true
         },
         {
-          "name": "id",
+          "name": "email",
           "type": "String",
-          "info": "Id of the draft",
+          "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "createSimpleDraft",
+      "description": "Creates a new simple draft",
+      "args": [
+        {
+          "name": "accessToken",
+          "type": "String",
+          "info": "Token received from Gmail",
+          "required": true
+        },
+        {
+          "name": "toEmail",
+          "type": "String",
+          "info": "Email recipient",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "Email subject",
+          "required": false
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "info": "Email message",
           "required": false
         },
         {
@@ -187,6 +227,18 @@
           "name": "email",
           "type": "String",
           "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
+          "required": false
+        },
+        {
+          "name": "format",
+          "type": "Select",
+          "options": [
+            "full",
+            "metadata",
+            "minimal",
+            "raw"
+          ],
+          "info": "The format to return the message in.",
           "required": false
         }
       ],
@@ -625,7 +677,7 @@
         {
           "name": "raw",
           "type": "String",
-          "info": "The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.",
+          "info": "The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>\r\nSubject: Failure Notice\r\n\r\n Hi. This is the mail transport agent at mail.elsewhere.com.\r\n ",
           "required": true
         },
         {
@@ -822,7 +874,7 @@
       ]
     },
     {
-      "name": "sendMessage",
+      "name": "sendRawMessage",
       "description": "Sends the specified message to the recipients in the To, Cc, and Bcc headers.",
       "args": [
         {
@@ -832,10 +884,62 @@
           "required": true
         },
         {
-          "name": "raw",
+          "name": "message",
           "type": "String",
-          "info": "The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.",
+          "info": "The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>\r\nSubject: Failure Notice\r\n\r\n Hi. This is the mail transport agent at mail.elsewhere.com.\r\n ",
           "required": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
+          "required": false
+        },
+        {
+          "name": "threadId",
+          "type": "String",
+          "info": "Message thread id",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "sendSimpleMessage",
+      "description": "Sends simple message",
+      "args": [
+        {
+          "name": "accessToken",
+          "type": "String",
+          "info": "Token received from Gmail",
+          "required": true
+        },
+        {
+          "name": "toEmail",
+          "type": "String",
+          "info": "Email recipient",
+          "required": true
+        },
+        {
+          "name": "subject",
+          "type": "String",
+          "info": "Email subject",
+          "required": false
+        },
+        {
+          "name": "message",
+          "type": "String",
+          "info": "Email message",
+          "required": false
         },
         {
           "name": "email",
@@ -942,7 +1046,7 @@
         {
           "name": "raw",
           "type": "String",
-          "info": "The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.",
+          "info": "The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>\r\nSubject: Failure Notice\r\n\r\n Hi. This is the mail transport agent at mail.elsewhere.com.\r\n ",
           "required": true
         },
         {

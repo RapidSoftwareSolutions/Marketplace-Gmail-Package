@@ -50,14 +50,28 @@ Set up or update a push notification watch on the given user mailbox.
 | labelFilterAction| Select| Filtering behavior of labelIds list specified. 
 | labelIds         | List  | List of label_ids to restrict notifications about. By default, if unspecified, all changes are pushed out. If specified then dictates which labels are required for a push notification to be generated.
 
-## Gmail.createDraft
+## Gmail.createRawDraft
 Creates a new draft
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
-| message    | String| The entire draft message in an RFC 2822 formatted and base64url encoded string.
-| id         | String| Id of the draft
+| message    | String| The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
+Subject: Failure Notice
+
+ Hi. This is the mail transport agent at mail.elsewhere.com.
+ 
+| email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+
+## Gmail.createSimpleDraft
+Creates a new simple draft
+
+| Field      | Type  | Description
+|------------|-------|----------
+| accessToken| String| Token received from Gmail
+| toEmail    | String| Email recipient
+| subject    | String| Email subject
+| message    | String| Email message
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
 ## Gmail.getSingleDraft
@@ -68,6 +82,7 @@ Get single draft
 | accessToken| String| Token received from Gmail
 | draftId    | String| Id of the draft
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+| format     | Select| The format to return the message in.
 
 ## Gmail.getDrafts
 Get all drafts
@@ -173,7 +188,11 @@ Directly inserts a message into only this user's mailbox similar to IMAP APPEND,
 | Field             | Type   | Description
 |-------------------|--------|----------
 | accessToken       | String | Token received from Gmail
-| raw               | String | The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+| raw               | String | The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
+Subject: Failure Notice
+
+ Hi. This is the mail transport agent at mail.elsewhere.com.
+ 
 | email             | String | The email of the user. The special value me can be used to indicate the authenticated user.
 | internalDateSource| Select | Source for Gmail's internal date of the message. 
 | deleted           | Boolean| Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
@@ -211,13 +230,29 @@ Update labels on single message
 | addLabelIds   | List  | Labels to add
 | removeLabelIds| List  | Labels to remove
 
-## Gmail.sendMessage
+## Gmail.sendRawMessage
 Sends the specified message to the recipients in the To, Cc, and Bcc headers.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
-| raw        | String| The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+| message    | String| The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
+Subject: Failure Notice
+
+ Hi. This is the mail transport agent at mail.elsewhere.com.
+ 
+| email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+| threadId   | String| Message thread id
+
+## Gmail.sendSimpleMessage
+Sends simple message
+
+| Field      | Type  | Description
+|------------|-------|----------
+| accessToken| String| Token received from Gmail
+| toEmail    | String| Email recipient
+| subject    | String| Email subject
+| message    | String| Email message
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 | threadId   | String| Message thread id
 
@@ -245,7 +280,11 @@ Imports a message into only this user's mailbox, with standard email delivery sc
 | Field             | Type   | Description
 |-------------------|--------|----------
 | accessToken       | String | Token received from Gmail
-| raw               | String | The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+| raw               | String | The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
+Subject: Failure Notice
+
+ Hi. This is the mail transport agent at mail.elsewhere.com.
+ 
 | email             | String | The email of the user. The special value me can be used to indicate the authenticated user.
 | deleted           | Boolean| Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts. 
 | neverMarkSpam     | Boolean| Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.
