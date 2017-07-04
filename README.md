@@ -455,12 +455,13 @@ Lists the forwarding addresses for the specified account.
 | accessToken| String| Token received from Gmail
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
-## Gmail.getForwardingAddresses
-Lists the forwarding addresses for the specified account.
+## Gmail.getForwardingAddress
+Get single forwarding address for the specified account.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
+| forwardingEmail| String| The forwarding address to be retrieved.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
 ## Gmail.createForwardingAddress
@@ -609,15 +610,6 @@ Lists the send-as aliases for the specified account. The result includes the pri
 | sendAsEmail| String| The send-as alias to be retrieved.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
-## Gmail.verifySendAsAlias
- Verify the specified send-as alias.
-
-| Field      | Type  | Description
-|------------|-------|----------
-| accessToken| String| Token received from Gmail
-| sendAsEmail| String| The send-as alias to be retrieved.
-| email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
-
 ## Gmail.getSendAsAliasSMIMEconfigs
 Lists S/MIME configs for the specified send-as alias
 
@@ -637,8 +629,8 @@ Get single S/MIME config for the specified send-as alias
 | configId   | String| The immutable ID for the SmimeInfo.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
-## Gmail.getSendAsAliasSMIMEconfig
-Get single S/MIME config for the specified send-as alias
+## Gmail.insertSendAsAliasSMIMEconfig
+Insert (upload) the given S/MIME config for the specified send-as alias. Note that pkcs12 format is required for the key.
 
 | Field               | Type      | Description
 |---------------------|-----------|----------
