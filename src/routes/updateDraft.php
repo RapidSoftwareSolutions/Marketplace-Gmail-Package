@@ -13,15 +13,13 @@ $app->post('/api/Gmail/updateDraft', function ($request, $response, $args) {
     //forming request to vendor API
     $email = empty($post_data['args']['email']) ? "me" : $post_data['args']['email'];
 
-    $query_str = $settings['api_url'] . 'users/' . $email . '/drafts/'. $post_data['args']['draftId'];
+    $query_str = $settings['api_url'] . 'users/' . $email . '/drafts/' . $post_data['args']['draftId'];
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
     $body['message']['raw'] = $post_data['args']['message'];
 
-    if (!empty($post_data['args']['id'])) {
-        $body['id'] = $post_data['args']['id'];
-    }
+   
     try {
 
         $resp = $client->request('PUT', $query_str, [

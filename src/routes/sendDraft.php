@@ -19,10 +19,7 @@ $app->post('/api/Gmail/sendDraft', function ($request, $response, $args) {
     $client = new GuzzleHttp\Client();
     $body['id'] = $post_data['args']['draftId'];
 
-    if (!empty($post_data['args']['message'])) {
-        $body['message']['raw'] = $post_data['args']['message'];
 
-    }
     try {
 
         $resp = $client->request('POST', $query_str, [

@@ -252,12 +252,6 @@
           "required": true
         },
         {
-          "name": "id",
-          "type": "String",
-          "info": "Id of the draft",
-          "required": false
-        },
-        {
           "name": "email",
           "type": "String",
           "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
@@ -289,12 +283,6 @@
           "name": "draftId",
           "type": "String",
           "info": "Id of the draft",
-          "required": true
-        },
-        {
-          "name": "message",
-          "type": "String",
-          "info": "The entire draft message in an RFC 2822 formatted and base64url encoded string.",
           "required": true
         },
         {
@@ -657,9 +645,9 @@
           "required": false
         },
         {
-          "name": "internalDate",
-          "type": "String",
-          "info": "Message internal date",
+          "name": "deleted",
+          "type": "Boolean",
+          "info": "Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.",
           "required": false
         },
         {
@@ -671,36 +659,6 @@
             "info": "Single label Id"
           },
           "info": "Only return messages with labels that match all of the specified label IDs.",
-          "required": false
-        },
-        {
-          "name": "historyId",
-          "type": "String",
-          "info": "Message history Id",
-          "required": false
-        },
-        {
-          "name": "id",
-          "type": "String",
-          "info": "Message Id",
-          "required": false
-        },
-        {
-          "name": "payload",
-          "type": "JSON",
-          "info": "Message payload",
-          "required": false
-        },
-        {
-          "name": "sizeEstimate",
-          "type": "Number",
-          "info": "Message estimated size",
-          "required": false
-        },
-        {
-          "name": "snippet",
-          "type": "String",
-          "info": "Message snippet",
           "required": false
         },
         {
@@ -758,7 +716,7 @@
             "minimal",
             "raw"
           ],
-          "info": "When given and format is METADATA, only include headers specified.",
+          "info": "The format to return the message in.",
           "required": false
         }
       ],
@@ -883,63 +841,6 @@
           "name": "email",
           "type": "String",
           "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
-          "required": false
-        },
-        {
-          "name": "internalDateSource",
-          "type": "Select",
-          "options": [
-            "dateHeader",
-            "receivedTime"
-          ],
-          "info": "Source for Gmail's internal date of the message. ",
-          "required": false
-        },
-        {
-          "name": "labelIds",
-          "type": "List",
-          "structure": {
-            "name": "labelId",
-            "type": "String",
-            "info": "Single label Id"
-          },
-          "info": "Only return messages with labels that match all of the specified label IDs.",
-          "required": false
-        },
-        {
-          "name": "historyId",
-          "type": "String",
-          "info": "Message history Id",
-          "required": false
-        },
-        {
-          "name": "id",
-          "type": "String",
-          "info": "Message Id",
-          "required": false
-        },
-        {
-          "name": "internalDate",
-          "type": "String",
-          "info": "Message internal date",
-          "required": false
-        },
-        {
-          "name": "payload",
-          "type": "JSON",
-          "info": "Message payload",
-          "required": false
-        },
-        {
-          "name": "sizeEstimate",
-          "type": "Number",
-          "info": "Message estimated size",
-          "required": false
-        },
-        {
-          "name": "snippet",
-          "type": "String",
-          "info": "Message snippet",
           "required": false
         },
         {
@@ -1076,59 +977,6 @@
             "receivedTime"
           ],
           "info": "Source for Gmail's internal date of the message. ",
-          "required": false
-        },
-        {
-          "name": "labelIds",
-          "type": "List",
-          "structure": {
-            "name": "labelId",
-            "type": "String",
-            "info": "Single label Id"
-          },
-          "info": "Only return messages with labels that match all of the specified label IDs.",
-          "required": false
-        },
-        {
-          "name": "historyId",
-          "type": "String",
-          "info": "Message history Id",
-          "required": false
-        },
-        {
-          "name": "id",
-          "type": "String",
-          "info": "Message Id",
-          "required": false
-        },
-        {
-          "name": "internalDate",
-          "type": "String",
-          "info": "Message internal date",
-          "required": false
-        },
-        {
-          "name": "payload",
-          "type": "JSON",
-          "info": "Message payload",
-          "required": true
-        },
-        {
-          "name": "sizeEstimate",
-          "type": "Number",
-          "info": "Message estimated size",
-          "required": false
-        },
-        {
-          "name": "snippet",
-          "type": "String",
-          "info": "Message snippet",
-          "required": false
-        },
-        {
-          "name": "threadId",
-          "type": "String",
-          "info": "Message thread id",
           "required": false
         }
       ],
@@ -1950,7 +1798,8 @@
           "type": "String",
           "info": "Token received from Gmail",
           "required": true
-        }, {
+        },
+        {
           "name": "forwardingEmail",
           "type": "String",
           "info": "The forwarding address to be retrieved.",
@@ -2617,7 +2466,6 @@
         }
       ]
     },
-
     {
       "name": "getSendAsAliasSMIMEconfigs",
       "description": "Lists S/MIME configs for the specified send-as alias",

@@ -19,33 +19,7 @@ $app->post('/api/Gmail/sendMessage', function ($request, $response, $args) {
     $client = new GuzzleHttp\Client();
     $body['raw'] = $post_data['args']['raw'];
 
-    if (!empty($post_data['args']['deleted'])) {
-        $body['deleted'] = $post_data['args']['deleted'];
-    }
-    if (!empty($post_data['args']['internalDateSource'])) {
-        $body['internalDateSource'] = $post_data['args']['internalDateSource'];
-    }
-    if (!empty($post_data['args']['labelIds'])) {
-        $body['labelIds'] = $post_data['args']['labelIds'];
-    }
-    if (!empty($post_data['args']['historyId'])) {
-        $body['historyId'] = $post_data['args']['historyId'];
-    }
-    if (!empty($post_data['args']['id'])) {
-        $body['id'] = $post_data['args']['id'];
-    }
-    if (!empty($post_data['args']['internalDate'])) {
-        $body['internalDate'] = $post_data['args']['internalDate'];
-    }
-    if (!empty($post_data['args']['payload'])) {
-        $body['payload'] = $post_data['args']['payload'];
-    }
-    if (!empty($post_data['args']['sizeEstimate'])) {
-        $body['sizeEstimate'] = $post_data['args']['sizeEstimate'];
-    }
-    if (!empty($post_data['args']['snippet'])) {
-        $body['snippet'] = $post_data['args']['snippet'];
-    }
+
     if (!empty($post_data['args']['threadId'])) {
         $body['threadId'] = $post_data['args']['threadId'];
     }

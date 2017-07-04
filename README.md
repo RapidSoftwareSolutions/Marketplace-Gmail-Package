@@ -6,8 +6,10 @@ Gmail
 * Credentials: apiKey
 
 ## How to get credentials: 
-0. Item one 
-1. Item two 
+0. Go to [Google Developers Console](https://console.developers.google.com/apis/library) 
+1. Register or log in
+2. Enable [Gmail API](https://console.developers.google.com/apis/api/gmail.googleapis.com/overview) for you account
+3. Create and application
 
 
 
@@ -54,7 +56,7 @@ Creates a new draft
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
-| message    | String  | The entire draft message in an RFC 2822 formatted and base64url encoded string.
+| message    | String| The entire draft message in an RFC 2822 formatted and base64url encoded string.
 | id         | String| Id of the draft
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
@@ -82,8 +84,7 @@ Update existing draft
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
 | draftId    | String| Id of the draft
-| message    | String  | The entire draft message in an RFC 2822 formatted and base64url encoded string.
-| id         | String| Id of the draft
+| message    | String| The entire draft message in an RFC 2822 formatted and base64url encoded string.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
 ## Gmail.sendDraft
@@ -93,7 +94,6 @@ Send existing draft
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
 | draftId    | String| Id of the draft
-| message    | String  | The entire draft message in an RFC 2822 formatted and base64url encoded string.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
 ## Gmail.deleteDraft
@@ -170,20 +170,15 @@ Lists the messages in the user's mailbox
 ## Gmail.insertMessageIntoMailbox
 Directly inserts a message into only this user's mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message.
 
-| Field             | Type  | Description
-|-------------------|-------|----------
-| accessToken       | String| Token received from Gmail
-| raw               | String| The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
-| email             | String| The email of the user. The special value me can be used to indicate the authenticated user.
-| internalDateSource| Select| Source for Gmail's internal date of the message. 
-| internalDate      | String| Message internal date
-| labelIds          | List  | Only return messages with labels that match all of the specified label IDs.
-| historyId         | String| Message history Id
-| id                | String| Message Id
-| payload           | JSON  | Message payload
-| sizeEstimate      | Number| Message estimated size
-| snippet           | String| Message snippet
-| threadId          | String| Message thread id
+| Field             | Type   | Description
+|-------------------|--------|----------
+| accessToken       | String | Token received from Gmail
+| raw               | String | The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+| email             | String | The email of the user. The special value me can be used to indicate the authenticated user.
+| internalDateSource| Select | Source for Gmail's internal date of the message. 
+| deleted           | Boolean| Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
+| labelIds          | List   | Only return messages with labels that match all of the specified label IDs.
+| threadId          | String | Message thread id
 
 ## Gmail.getSingleMailboxMessage
 Get single message
@@ -194,7 +189,7 @@ Get single message
 | messageId      | String| Id of the message
 | email          | String| The email of the user. The special value me can be used to indicate the authenticated user.
 | metadataHeaders| String| When given and format is METADATA, only include headers specified.
-| format         | Select| When given and format is METADATA, only include headers specified.
+| format         | Select| The format to return the message in.
 
 ## Gmail.deleteSingleMailboxMessage
 Delete single message
@@ -219,20 +214,12 @@ Update labels on single message
 ## Gmail.sendMessage
 Sends the specified message to the recipients in the To, Cc, and Bcc headers.
 
-| Field             | Type  | Description
-|-------------------|-------|----------
-| accessToken       | String| Token received from Gmail
-| raw               | String| The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
-| email             | String| The email of the user. The special value me can be used to indicate the authenticated user.
-| internalDateSource| Select| Source for Gmail's internal date of the message. 
-| labelIds          | List  | Only return messages with labels that match all of the specified label IDs.
-| historyId         | String| Message history Id
-| id                | String| Message Id
-| internalDate      | String| Message internal date
-| payload           | JSON  | Message payload
-| sizeEstimate      | Number| Message estimated size
-| snippet           | String| Message snippet
-| threadId          | String| Message thread id
+| Field      | Type  | Description
+|------------|-------|----------
+| accessToken| String| Token received from Gmail
+| raw        | String| The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.
+| email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+| threadId   | String| Message thread id
 
 ## Gmail.moveMessageToTrash
 Move single message to trash
@@ -264,14 +251,6 @@ Imports a message into only this user's mailbox, with standard email delivery sc
 | neverMarkSpam     | Boolean| Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.
 | processForCalendar| Boolean| Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.
 | internalDateSource| Select | Source for Gmail's internal date of the message. 
-| labelIds          | List   | Only return messages with labels that match all of the specified label IDs.
-| historyId         | String | Message history Id
-| id                | String | Message Id
-| internalDate      | String | Message internal date
-| payload           | JSON   | Message payload
-| sizeEstimate      | Number | Message estimated size
-| snippet           | String | Message snippet
-| threadId          | String | Message thread id
 
 ## Gmail.batchMessageDelete
 Delete several messages
@@ -458,11 +437,11 @@ Lists the forwarding addresses for the specified account.
 ## Gmail.getForwardingAddress
 Get single forwarding address for the specified account.
 
-| Field      | Type  | Description
-|------------|-------|----------
-| accessToken| String| Token received from Gmail
+| Field          | Type  | Description
+|----------------|-------|----------
+| accessToken    | String| Token received from Gmail
 | forwardingEmail| String| The forwarding address to be retrieved.
-| email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+| email          | String| The email of the user. The special value me can be used to indicate the authenticated user.
 
 ## Gmail.createForwardingAddress
 Creates a forwarding address.

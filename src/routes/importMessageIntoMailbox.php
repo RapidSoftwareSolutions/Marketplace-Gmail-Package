@@ -34,27 +34,7 @@ $app->post('/api/Gmail/importMessageIntoMailbox', function ($request, $response,
     if (!empty($post_data['args']['processForCalendar'])) {
         $body['processForCalendar'] = $post_data['args']['processForCalendar'];
     }
-    if (!empty($post_data['args']['labelIds'])) {
-        $body['labelIds'] = $post_data['args']['labelIds'];
-    }
-    if (!empty($post_data['args']['historyId'])) {
-        $body['historyId'] = $post_data['args']['historyId'];
-    }
-    if (!empty($post_data['args']['id'])) {
-        $body['id'] = $post_data['args']['id'];
-    }
-    if (!empty($post_data['args']['payload'])) {
-        $body['payload'] = $post_data['args']['payload'];
-    }
-    if (!empty($post_data['args']['sizeEstimate'])) {
-        $body['sizeEstimate'] = $post_data['args']['sizeEstimate'];
-    }
-    if (!empty($post_data['args']['snippet'])) {
-        $body['snippet'] = $post_data['args']['snippet'];
-    }
-    if (!empty($post_data['args']['threadId'])) {
-        $body['threadId'] = $post_data['args']['threadId'];
-    }
+
 
     try {
 
