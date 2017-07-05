@@ -6,16 +6,15 @@ $app->post('/api/Gmail/updateDraft', function ($request, $response, $args) {
 
     //forming request to vendor API
     $email = empty($post_data['args']['email']) ? "me" : $post_data['args']['email'];
+    $post_data = $request->getParsedBody();
 
     $query_str = $settings['api_url'] . 'users/' . $email . '/drafts/' . $post_data['args']['draftId'];
-    $post_data = $request->getParsedBody();
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
     $post_data['args']['message'] = str_replace('\"', '"', $post_data['args']['message']);
     $body['message']['raw'] = \Models\EmailEncoder::base64url_encode($post_data['args']['message']);
 
-   
     try {
 
         $resp = $client->request('PUT', $query_str, [
