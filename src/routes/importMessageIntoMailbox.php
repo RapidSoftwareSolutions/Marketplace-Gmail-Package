@@ -52,7 +52,7 @@ $app->post('/api/Gmail/importMessageIntoMailbox', function ($request, $response,
         }
 
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
-        $responseBody = $exception->getResponse()->getReasonPhrase();
+        $responseBody = $exception->getResponse()->getBody()->getContents();
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';
         $result['contextWrites']['to']['status_msg'] = $responseBody;

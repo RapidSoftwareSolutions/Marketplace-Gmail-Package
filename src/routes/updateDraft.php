@@ -3,21 +3,17 @@ $app->post('/api/Gmail/updateDraft', function ($request, $response, $args) {
     $settings = $this->settings;
 
     //checking properly formed json
-    $checkRequest = $this->validation;
-    $validateRes = $checkRequest->validate($request, ['accessToken', 'message', 'draftId']);
-    if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
-        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
-    } else {
-        $post_data = $validateRes;
-    }
+
     //forming request to vendor API
     $email = empty($post_data['args']['email']) ? "me" : $post_data['args']['email'];
 
     $query_str = $settings['api_url'] . 'users/' . $email . '/drafts/' . $post_data['args']['draftId'];
+    $post_data = $request->getParsedBody();
 
     //requesting remote API
     $client = new GuzzleHttp\Client();
-    $body['message']['raw'] = $post_data['args']['message'];
+    $post_data['args']['message'] = str_replace('\"', '"', $post_data['args']['message']);
+    $body['message']['raw'] = \Models\EmailEncoder::base64url_encode($post_data['args']['message']);
 
    
     try {
