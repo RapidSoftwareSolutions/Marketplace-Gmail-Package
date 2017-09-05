@@ -16,6 +16,10 @@
     ]
   },
   "steps":[
+    "Go to the https://console.developers.google.com/",
+    "Create or select a project.",
+    "Click Continue to enable the API.",
+    "On the Credentials page, get an API key (and set the API key restrictions).",
     "Browse to https://accounts.google.com/o/oauth2/v2/auth?client_id=CLIENT_ID&redirect_uri=REDIRECT_URI&response_type=token&scope=https://mail.google.com/, where CLIENT_ID is you apiKey and REDIRECT_URI is the redirect url you set up in your credentials",
     "Log in or choose an account",
     "Click ALLOW to provide permissions to your application",
