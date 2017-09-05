@@ -56,12 +56,15 @@ Creates a new draft
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
-| message    | String| The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
-Subject: Failure Notice
-
- Hi. This is the mail transport agent at mail.elsewhere.com.
- 
+| message    | String| The entire draft message in an RFC 2822 formatted.  
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
+
+```
+Example: 
+To: <someone@gmail.com>
+Subject: Failure Notice
+Hi. This is the mail transport agent at mail.elsewhere.com.
+ ```
 
 ## Gmail.createSimpleDraft
 Creates a new simple draft
@@ -188,16 +191,19 @@ Directly inserts a message into only this user's mailbox similar to IMAP APPEND,
 | Field             | Type   | Description
 |-------------------|--------|----------
 | accessToken       | String | Token received from Gmail
-| raw               | String | The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
-Subject: Failure Notice
-
- Hi. This is the mail transport agent at mail.elsewhere.com.
- 
+| raw               | String | The entire draft message in an RFC 2822 formatted. 
 | email             | String | The email of the user. The special value me can be used to indicate the authenticated user.
 | internalDateSource| Select | Source for Gmail's internal date of the message. 
 | deleted           | Boolean| Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts.
 | labelIds          | List   | Only return messages with labels that match all of the specified label IDs.
 | threadId          | String | Message thread id
+
+```
+Example: 
+To: <someone@gmail.com>
+Subject: Failure Notice
+Hi. This is the mail transport agent at mail.elsewhere.com.
+ ```
 
 ## Gmail.getSingleMailboxMessage
 Get single message
@@ -236,13 +242,15 @@ Sends the specified message to the recipients in the To, Cc, and Bcc headers.
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Token received from Gmail
-| message    | String| The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
-Subject: Failure Notice
-
- Hi. This is the mail transport agent at mail.elsewhere.com.
- 
+| message    | String| The entire draft message in an RFC 2822 formatted.
 | email      | String| The email of the user. The special value me can be used to indicate the authenticated user.
 | threadId   | String| Message thread id
+```
+Example: 
+To: <someone@gmail.com>
+Subject: Failure Notice
+Hi. This is the mail transport agent at mail.elsewhere.com.
+ ```
 
 ## Gmail.sendSimpleMessage
 Sends simple message
@@ -280,16 +288,19 @@ Imports a message into only this user's mailbox, with standard email delivery sc
 | Field             | Type   | Description
 |-------------------|--------|----------
 | accessToken       | String | Token received from Gmail
-| raw               | String | The entire draft message in an RFC 2822 formatted. Example: To: <someone@gmail.com>
-Subject: Failure Notice
-
- Hi. This is the mail transport agent at mail.elsewhere.com.
- 
+| raw               | String | The entire draft message in an RFC 2822 formatted. 
 | email             | String | The email of the user. The special value me can be used to indicate the authenticated user.
 | deleted           | Boolean| Mark the email as permanently deleted (not TRASH) and only visible in Google Vault to a Vault administrator. Only used for G Suite accounts. 
 | neverMarkSpam     | Boolean| Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.
 | processForCalendar| Boolean| Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.
 | internalDateSource| Select | Source for Gmail's internal date of the message. 
+
+```
+Example: 
+To: <someone@gmail.com>
+Subject: Failure Notice
+Hi. This is the mail transport agent at mail.elsewhere.com.
+ ```
 
 ## Gmail.batchMessageDelete
 Delete several messages
