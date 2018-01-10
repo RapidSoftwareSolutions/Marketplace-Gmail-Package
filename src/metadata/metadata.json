@@ -1904,40 +1904,6 @@
       ]
     },
     {
-      "name": "getForwardingAddress",
-      "description": "Get single forwarding address for the specified account.",
-      "args": [
-        {
-          "name": "accessToken",
-          "type": "String",
-          "info": "Token received from Gmail",
-          "required": true
-        },
-        {
-          "name": "forwardingEmail",
-          "type": "String",
-          "info": "The forwarding address to be retrieved.",
-          "required": true
-        },
-        {
-          "name": "email",
-          "type": "String",
-          "info": "The email of the user. The special value me can be used to indicate the authenticated user.",
-          "required": false
-        }
-      ],
-      "callbacks": [
-        {
-          "name": "error",
-          "info": "Error"
-        },
-        {
-          "name": "success",
-          "info": "Success"
-        }
-      ]
-    },
-    {
       "name": "createForwardingAddress",
       "description": "Creates a forwarding address.",
       "args": [
